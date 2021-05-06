@@ -1,1 +1,1 @@
-"# Python-Django-Araá alçm satçm ilan projesi" 
+"# Python-Django-Arac alim satim ilan projesi" 
