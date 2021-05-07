@@ -1,10 +1,11 @@
 {%  extends "homebase.html" %}
 
-{% block title %}Index Sayfasi{% endblock %}
+{% block title %}{{setting.title}}{% endblock %}
 
-{% block keywords %}Index Sayfasi Anahtar Kelimeler{% endblock %}
+{% block keywords %}{{setting.keywords}}{% endblock %}
 
-{% block description %}Index Sayfasi Aciklama{% endblock %}
+{% block description %}{{setting.description}}{% endblock %}
+{% block head %}<link rel='shorcut icon' type="image/x-icon" href="{{setting.icon.url}}"/>{% endblock %}
 
 {% block slider %}{% include "slider.html" %}{% endblock %}
 
