@@ -1,4 +1,5 @@
 from django.db import models
+from ckeditor_uploader.fields import RichTextUploadingField
 
 # Create your models here.
 from django.utils.safestring import mark_safe
@@ -44,7 +45,7 @@ class Product(models.Model):
     motor_power = models.IntegerField()
     engine_capacity = models.IntegerField()
     case_type = models.CharField(max_length=50)
-    detail = models.TextField()
+    detail = RichTextUploadingField()
     status = models.CharField(max_length=10,choices=STATUS)
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
