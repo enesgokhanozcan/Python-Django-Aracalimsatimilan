@@ -1,6 +1,8 @@
 from django.db import models
 
 # Create your models here.
+from django.utils.safestring import mark_safe
+
 
 class Category(models.Model):
     STATUS = (
@@ -19,6 +21,11 @@ class Category(models.Model):
 
     def __str__(self):
         return self.title
+    def image_tag(self):
+        if self.image:
+            return mark_safe(f'<img src="{self.image.url}" height="50"/>')
+        else:
+            return ""
 
 
 class Product(models.Model):
@@ -45,6 +52,12 @@ class Product(models.Model):
     def __str__(self):
         return self.title
 
+    def image_tag(self):
+        if self.image:
+            return mark_safe(f'<img src="{self.image.url}" height="50"/>')
+        else:
+            return ""
+
 class Images(models.Model):
         product=models.ForeignKey(Product,on_delete=models.CASCADE)
         title = models.CharField(max_length=200,blank=True)
@@ -52,5 +65,12 @@ class Images(models.Model):
 
         def __str__(self):
             return self.title
+
+        def image_tag(self):
+            if self.image:
+                return mark_safe(f'<img src="{self.image.url}" height="50"/>')
+            else:
+                return ""
+
 
 
