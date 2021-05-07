@@ -1,14 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Django</title>
-</head>
-<body>
-<h1>Merhaba Dünyalı</h1>
-<h3>Karabük Üniversitesi</h3>
-<p>
-    {{ text }}
-</p>
-</body>
-</html>
+{%  extends "homebase.html" %}
+
+{% block title %}Index Sayfasi{% endblock %}
+
+{% block keywords %}Index Sayfasi Anahtar Kelimeler{% endblock %}
+
+{% block description %}Index Sayfasi Aciklama{% endblock %}
+
+{% block slider %}{% include "slider.html" %}{% endblock %}
+
+{% block content %}{% include "content.html" %}{% endblock %}
