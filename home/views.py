@@ -1,8 +1,9 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
+from django.contrib import messages
 
 # Create your views here.
-from home.models import Setting
+from home.models import Setting, ContactFormMessage, ContactForm
 
 
 def index(request):
@@ -18,6 +19,20 @@ def references(request):
     context={'setting':setting}
     return render(request, 'references.html', context)
 def contact(request):
+    if request.method == 'POST':  # check post
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            data = ContactFormMessage()  # create relation with model
+            data.name = form.cleaned_data['name']  # get form input data
+            data.email = form.cleaned_data['email']
+            data.subject = form.cleaned_data['subject']
+            data.message = form.cleaned_data['message']
+            data.ip = request.META.get('REMOTE_ADDR')
+            data.save()  # save data to table
+            messages.success(request, "Your message has been sent successfully... Thank you for your message.")
+            return HttpResponseRedirect('/contact')
+
     setting = Setting.objects.get(pk=1)
-    context={'setting':setting}
+    form=ContactForm
+    context={'setting':setting,'form':form}
     return render(request, 'contact.html', context)
