@@ -9,18 +9,15 @@
 			<div class="row">
 				<div class="col-sm-12">
 					<div id="slider-carousel" class="carousel slide" data-ride="carousel">
-						<ol class="carousel-indicators">
-							<li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
-							<li data-target="#slider-carousel" data-slide-to="1"></li>
-							<li data-target="#slider-carousel" data-slide-to="2"></li>
-						</ol>
-
 						<div class="carousel-inner">
 							<div class="item active">
 								<div class="col-sm-6">
 									<h1>E-SHOPPER</h1>
 									<h2>Hayallerinize ulaşmak bir tık uzağınızda...</h2>
 									<p>Arzu ettiğiniz araçlara en uygun fiyata ulaşmanın keyfiyle yaşayın.</p>
+								</div>
+                                <div class="col-sm-6">
+									<img src="{% static 'images/home/resim.jpg'%}" style="height:300px" alt="" />
 								</div>
 							</div>
                             {% for rs in sliderdata %}
