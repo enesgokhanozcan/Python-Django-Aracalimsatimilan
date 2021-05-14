@@ -9,9 +9,11 @@ from product.models import Product, Category
 
 def index(request):
     setting = Setting.objects.get(pk=1)
-    sliderdata=Product.objects.all()[:3]
+    sliderdata=Product.objects.all()[:4]
+    product_latest = Product.objects.all().order_by('-id')[:4]
+    product_picked= Product.objects.all().order_by('?')[:4]
     category = Category.objects.all()
-    context={'setting':setting,'page':'home','sliderdata':sliderdata,'category':category}
+    context={'setting':setting,'page':'home','sliderdata':sliderdata,'category':category,'product_latest':product_latest,'product_picked':product_picked}
     return render(request, 'index.html', context)
 def aboutus(request):
     setting = Setting.objects.get(pk=1)
