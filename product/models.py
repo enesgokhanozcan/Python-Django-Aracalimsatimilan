@@ -2,6 +2,7 @@ from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
 
 # Create your models here.
+from django.urls import reverse
 from django.utils.safestring import mark_safe
 from mptt.fields import TreeForeignKey
 from mptt.models import MPTTModel
@@ -17,7 +18,7 @@ class Category(MPTTModel):
     keywords = models.CharField(blank=True,max_length=255)
     image = models.ImageField(blank=True,upload_to='images/')
     status = models.CharField(max_length=10,choices=STATUS)
-    slug = models.SlugField()
+    slug = models.SlugField(null=False, unique=True)
     parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
@@ -27,6 +28,9 @@ class Category(MPTTModel):
 
     class MPTTMeta:
         order_insertion_by = ['title']
+
+    def get_absolute_url(self):
+        return reverse('category_detail', kwargs={'slug': self.slug})
 
     def __str__(self):  # __str__ method elaborated later in
         full_path = [self.title]  # post.  use __unicode__ in place of
@@ -63,13 +67,16 @@ class Product(models.Model):
     engine_capacity = models.IntegerField()
     case_type = models.CharField(max_length=50)
     detail = RichTextUploadingField()
-    slug = models.SlugField(blank=True,max_length=200)
+    slug = models.SlugField(null=False, unique=True)
     status = models.CharField(max_length=10,choices=STATUS)
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('category_detail', kwargs={'slug': self.slug})
 
     def image_tag(self):
         if self.image:
