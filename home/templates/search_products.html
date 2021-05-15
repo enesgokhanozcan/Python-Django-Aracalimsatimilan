@@ -1,0 +1,46 @@
+{%  extends "homebase.html" %}
+
+{% block title %}{{ query }} results {% endblock %}
+
+{% block keywords %}{{setting.keywords}}{% endblock %}
+
+{% block description %}{{setting.description}}{% endblock %}
+{% block head %}<link rel='shorcut icon' type="image/x-icon" href="{{setting.icon.url}}"/>{% endblock %}
+
+{% block content %}
+    <div class="breadcrumbs">
+				<ol class="breadcrumb">
+				  <li><a href="#">Home</a></li>
+				  <li class="active">{{ query }} results</li>
+				</ol>
+    </div><!--/breadcrums-->
+    <div class="col-sm-12 padding-right">
+					<div class="features_items"><!--features_items-->
+						<h2 class="title text-center">Car List</h2>
+                        {% for rs in products %}
+						<div class="col-sm-4">
+							<div class="product-image-wrapper">
+								<div class="single-products">
+									<div class="productinfo text-center">
+										<img src="{{ rs.image.url }}" alt="" style="width: 268px" height="249px">
+										<h2>{{ rs.price}}</h2>
+										<p>{{ rs.title}}</p>
+										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Detail</a>
+									</div>
+									<div class="product-overlay">
+										<div class="overlay-content">
+											<h2>{{ rs.price}}</h2>
+											<p>{{ rs.title}}</p>
+											<a href="/product/{{ node.id }}/{{ node.slug }}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Detail</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+                        {% endfor %}
+					</div><!--features_items-->
+				</div>
+
+
+
+{% endblock %}

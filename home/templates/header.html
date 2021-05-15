@@ -33,37 +33,11 @@
 						<div class="logo pull-left">
 							<a href="/home"><img src="{% static 'images/home/logo.png'%}" alt="" /></a>
 						</div>
-						<div class="btn-group pull-right">
-							<div class="btn-group">
-								<button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
-									USA
-									<span class="caret"></span>
-								</button>
-								<ul class="dropdown-menu">
-									<li><a href="#">Canada</a></li>
-									<li><a href="#">UK</a></li>
-								</ul>
-							</div>
-
-							<div class="btn-group">
-								<button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
-									DOLLAR
-									<span class="caret"></span>
-								</button>
-								<ul class="dropdown-menu">
-									<li><a href="#">Canadian Dollar</a></li>
-									<li><a href="#">Pound</a></li>
-								</ul>
-							</div>
-						</div>
 					</div>
 					<div class="col-sm-8">
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
 								<li><a href="#"><i class="fa fa-user"></i> Account</a></li>
-								<li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
-								<li><a href="{% static 'checkout.html"><i class="fa fa-crosshairs'%}"></i> Checkout</a></li>
-								<li><a href="{% static 'cart.html"><i class="fa fa-shopping-cart'%}"></i> Cart</a></li>
 								<li><a href="{% static 'login.html"><i class="fa fa-lock'%}"></i> Login</a></li>
 							</ul>
 						</div>
@@ -87,22 +61,6 @@
 						<div class="mainmenu pull-left">
 							<ul class="nav navbar-nav collapse navbar-collapse">
 								<li><a href="/" class="active">Home</a></li>
-								<li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
-                                    <ul role="menu" class="sub-menu">
-                                        <li><a href="{% static 'shop.html'%}">Products</a></li>
-										<li><a href="{% static 'product-details.html'%}">Product Details</a></li>
-										<li><a href="{% static 'checkout.html'%}">Checkout</a></li>
-										<li><a href="{% static 'cart.html'%}">Cart</a></li>
-										<li><a href="{% static 'login.html'%}">Login</a></li>
-                                    </ul>
-                                </li>
-								<li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
-                                    <ul role="menu" class="sub-menu">
-                                        <li><a href="{% static 'blog.html'%}">Blog List</a></li>
-										<li><a href="{% static 'blog-single.html'%}">Blog Single</a></li>
-                                    </ul>
-                                </li>
-								<li><a href="{% static '404.html'%}">404</a></li>
 								<li><a href="/contact">Contact</a></li>
                                 <li><a href="/aboutus">Aboutus</a></li>
                                 <li><a href="/references">References</a></li>
@@ -111,8 +69,27 @@
 					</div>
 					<div class="col-sm-3">
 						<div class="search_box pull-right">
-							<input type="text" placeholder="Search"/>
-						</div>
+                            <form action="/search/" method="post">
+                            {% csrf_token %}
+                            <input id="query" name="query" class="search_box pull-right" type="text" placeholder="Search">
+                            <select name="catid"  class="input search-categories">
+                                <option value="0">All Categories</option>
+
+                                {% load mptt_tags %}
+
+                                {% recursetree category %}
+                                    {% if node.is_leaf_node %}
+                                        <option value="{{ node.id }}">{{ node.title }}</option>
+                                    {% endif %}
+                                    {% if not node.is_leaf_node %}
+                                        <optgroup label="{{ node.title }}">
+                                            {{ children }}
+                                        </optgroup>
+                                    {% endif %}
+                                {% endrecursetree %}
+                            </select>
+                            </form>
+                        </div>
 					</div>
 				</div>
 			</div>
