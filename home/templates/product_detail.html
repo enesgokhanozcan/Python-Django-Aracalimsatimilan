@@ -11,13 +11,65 @@
     <div class="breadcrumbs">
 				<ol class="breadcrumb">
 				  <li><a href="#">Home</a></li>
+                  <li><a href="/category/{{ product.category.id }}/{{ product.category.slug }}">{{product.category.title}}</a></li>
 				  <li class="active">{{product.title}}</li>
 				</ol>
     </div><!--/breadcrums-->
     <div class="section">
         <div class="container">
             <div class="row">
-                {{product.title}}
+                <div class="col-sm-12 padding-right">
+					<div class="product-details"><!--product-details-->
+						<div class="col-sm-5">
+							<div class="view-product">
+								<img src="{{ product.image.url }}" alt="" />
+							</div>
+							<div id="similar-product" class="carousel slide" data-ride="carousel">
+
+								  <!-- Wrapper for slides -->
+								    <div class="carousel-inner">
+										<div class="item active">
+										  <a href=""><img src="{{ product.image.url }}" alt=""></a>
+										</div>
+                                        {% for rs in images %}
+										<div class="item">
+										  <a href=""><img src="{{ rs.image.url }}" alt=""></a>
+										</div>
+                                        {% endfor %}
+									</div>
+
+								  <!-- Controls -->
+								  <a class="left item-control" href="#similar-product" data-slide="prev">
+									<i class="fa fa-angle-left"></i>
+								  </a>
+								  <a class="right item-control" href="#similar-product" data-slide="next">
+									<i class="fa fa-angle-right"></i>
+								  </a>
+							</div>
+						</div>
+						<div class="col-sm-5">
+							<div class="product-information"><!--/product-information-->
+								<img src="images/product-details/new.jpg" class="newarrival" alt="" />
+								<h2>{{ product.title}}</h2>
+								<p><b>Prorduct ID:</b>{{ product.id}}</p>
+								<span>
+									<span><b>Price:</b>{{ product.price}}<b>$</b></span>
+								</span>
+                                <p><b>Description:</b> {{ product.description}}</p>
+                                <p><b>Case Type:</b> {{ product.case_type}}</p>
+                                <p><b>Engine Capacity:</b> {{ product.engine_capacity}}<b> cc</b></p>
+                                <p><b>Motor power:</b> {{ product.motor_power}}</p>
+                                <p><b>Fuel:</b> {{ product.fuel}}</p>
+                                <p><b>Year:</b> {{ product.year}}</p>
+                                <p><b>Description:</b> {{ product.description}}</p>
+								<p><b>Availability:</b> {{ product.status}}</p>
+								<p><b>Condition:</b>Used</p>
+                                <p><b>Detail</b> {{ product.detail | safe}}</p>
+
+							</div><!--/product-information-->
+						</div>
+                    </div>
+                </div><!--/product-details-->
             </div>
         </div>
     </div>

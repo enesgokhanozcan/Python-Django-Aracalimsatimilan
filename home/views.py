@@ -7,7 +7,7 @@ from django.contrib import messages
 # Create your views here.
 from home.forms import SearchForm
 from home.models import Setting, ContactFormMessage, ContactForm
-from product.models import Product, Category
+from product.models import Product, Category, Images
 
 
 def index(request):
@@ -93,3 +93,12 @@ def search_auto(request):
     data = 'fail'
   mimetype = 'application/json'
   return HttpResponse(data, mimetype)
+
+def product_detail(request,id,slug):
+    category = Category.objects.all()
+    product = Product.objects.get(pk=id)
+    images = Images.objects.filter(product_id=id)
+    context = {'category': category,
+               'product': product,
+               'images':images}
+    return render(request, 'product_detail.html', context)
