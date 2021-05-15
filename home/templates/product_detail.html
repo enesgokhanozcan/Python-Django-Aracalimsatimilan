@@ -11,7 +11,7 @@
     <div class="breadcrumbs">
 				<ol class="breadcrumb">
 				  <li><a href="#">Home</a></li>
-                  <li><a href="/category/{{ product.category.id }}/{{ product.category.slug }}">{{product.category.title}}</a></li>
+                  <li><a href="/category/{{ product.category.id }}/{{ product.category.slug }}">{{product.category}}</a></li>
 				  <li class="active">{{product.title}}</li>
 				</ol>
     </div><!--/breadcrums-->
@@ -51,7 +51,7 @@
 							<div class="product-information"><!--/product-information-->
 								<img src="images/product-details/new.jpg" class="newarrival" alt="" />
 								<h2>{{ product.title}}</h2>
-								<p><b>Prorduct ID:</b>{{ product.id}}</p>
+								<p><b>Product ID:</b>{{ product.id}}</p>
 								<span>
 									<span><b>Price:</b>{{ product.price}}<b>$</b></span>
 								</span>
@@ -62,11 +62,12 @@
                                 <p><b>Fuel:</b> {{ product.fuel}}</p>
                                 <p><b>Year:</b> {{ product.year}}</p>
                                 <p><b>Description:</b> {{ product.description}}</p>
-								<p><b>Availability:</b> {{ product.status}}</p>
+								<p><b>Ad Status:</b> {{ product.status}}</p>
 								<p><b>Condition:</b>Used</p>
+							</div>
+                            <div>
                                 <p><b>Detail</b> {{ product.detail | safe}}</p>
-
-							</div><!--/product-information-->
+                            </div>
 						</div>
                     </div>
                 </div><!--/product-details-->
