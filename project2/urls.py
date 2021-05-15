@@ -26,6 +26,7 @@ urlpatterns = [
     path('references/', views.references, name='references'),
     path('contact/', views.contact, name='contact'),
     path('search/', views.search, name='search'),
+    path('search_auto/', views.search_auto, name='search_auto'),
     path('home/', include('home.urls')),
     path('product/', include('product.urls')),
     path('admin/', admin.site.urls),

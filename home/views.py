@@ -1,3 +1,5 @@
+import json
+
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib import messages
@@ -66,3 +68,18 @@ def search(request):
             context = {'products': products, 'query':query,
                        'category': category }
             return render(request, 'search_products.html', context)
+
+def search_auto(request):
+  if request.is_ajax():
+    q = request.GET.get('term', '')
+    products = Product.objects.filter(title__icontains=q)
+    results = []
+    for rs in products:
+      products_json = {}
+      products_json = rs.title
+      results.append(products_json)
+    data = json.dumps(results)
+  else:
+    data = 'fail'
+  mimetype = 'application/json'
+  return HttpResponse(data, mimetype)
