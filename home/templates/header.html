@@ -1,4 +1,5 @@
 {% load static %}
+{% load mptt_tags %}
 <header id="header"><!--header-->
 		<div class="header_top"><!--header_top-->
 			<div class="container">
@@ -84,28 +85,26 @@
                         }
                     </script>
 					<div class="col-sm-3">
-						<div class="search_box pull-right">
-                            <form action="/search/" method="post">
-                            {% csrf_token %}
-                            <input id="query" name="query" class="search_box pull-right" type="text" placeholder="Search">
-                            <select name="catid"  class="input search-categories">
-                                <option value="0">All Categories</option>
-
+                             <div class="search_box pull-right">
+                                <form action="/search/" method="post">
+                                {% csrf_token %}
+                                <input id="query" name="query" class="input search-input" type="text" placeholder="Search">
                                 {% load mptt_tags %}
-
-                                {% recursetree category %}
-                                    {% if node.is_leaf_node %}
-                                        <option value="{{ node.id }}">{{ node.title }}</option>
-                                    {% endif %}
-                                    {% if not node.is_leaf_node %}
-                                        <optgroup label="{{ node.title }}">
-                                            {{ children }}
-                                        </optgroup>
-                                    {% endif %}
-                                {% endrecursetree %}
-                            </select>
-                            </form>
-                        </div>
+                                <select name="catid"  class="input search-categories">
+                                    <option value="0">All Categories"</option>
+                                        {% recursetree category %}
+                                            {% if node.is_leaf_node %}
+                                                <option value="{{ node.id }}">{{ node.title }}</option>
+                                            {% endif %}
+                                            {% if not node.is_leaf_node %}
+                                                <optgroup label="{{ node.title }}">
+                                                    {{ children }}
+                                                </optgroup>
+                                            {% endif %}
+                                        {% endrecursetree %}
+                                </select>
+                                </form>
+                            </div>
 					</div>
 				</div>
 			</div>

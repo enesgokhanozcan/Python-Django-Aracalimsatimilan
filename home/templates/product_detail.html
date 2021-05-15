@@ -1,0 +1,27 @@
+{%  extends "homebase.html" %}
+
+{% block title %}{{product.title}}{% endblock %}
+
+{% block keywords %}{{product.keywords}}{% endblock %}
+
+{% block description %}{{product.description}}{% endblock %}
+{% block head %}<link rel='shorcut icon' type="image/x-icon" href="{{setting.icon.url}}"/>{% endblock %}
+
+{% block content %}
+    <div class="breadcrumbs">
+				<ol class="breadcrumb">
+				  <li><a href="#">Home</a></li>
+				  <li class="active">{{product.title}}</li>
+				</ol>
+    </div><!--/breadcrums-->
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                {{product.title}}
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
