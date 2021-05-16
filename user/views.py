@@ -5,6 +5,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from product.models import Category
+from user.forms import SignUpForm
 from user.models import UserProfile
 
 
@@ -34,8 +35,26 @@ def login_form(request):
 
 
 def signup_form(request):
-    return HttpResponse("Signup Form")
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save() #completed sign up
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            return HttpResponseRedirect('/')
+        else:
+            messages.warning(request,form.errors)
+            return HttpResponseRedirect('/signup')
 
+
+    form = SignUpForm()
+    category = Category.objects.all()
+    context = {'category': category,
+               'form': form,
+               }
+    return render(request, 'signup.html', context)
 
 def logout_func(request):
     logout(request)
