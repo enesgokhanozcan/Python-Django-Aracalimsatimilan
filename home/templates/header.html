@@ -35,9 +35,9 @@
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
                                 {% if user.id is not None %}
-                                <li class="dropdown"><img src="{{ request.session.userimage }}" style="height: 40px">  Welcome {{ user.first_name }}</a></li>
-                                <li><a href="#"></i> My Advertisements</a></li>
-                                <li><a href="#"></i> Advertisement I Follow</a></li>
+                                <li class="dropdown"><img src="{{ request.session.userimage }}" style="height: 40px"> Welcome {{ user.first_name }}</a></li>
+                                <li><a href="/user"></i> My Account</a></li>
+                                <li><a href="#"></i>My Advertisement</a></li>
                                 <li><a href="/logout"></i> Log Out</a></li>
                                 {% else %}
 								<li><a href="/login"></i> Login</a></li>
