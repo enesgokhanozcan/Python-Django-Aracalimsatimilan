@@ -1,4 +1,5 @@
 from ckeditor_uploader.fields import RichTextUploadingField
+from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
@@ -64,3 +65,7 @@ class ContactForm(ModelForm):
             'email': TextInput(attrs={'class': 'form-control', 'placeholder': 'Email Address'}),
             'message': Textarea(attrs={'class': 'form-control', 'placeholder': 'Your Message','rows':'8'}),
         }
+
+
+
+
