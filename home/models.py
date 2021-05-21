@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
-from django.forms import ModelForm,TextInput,Textarea
+from django.forms import ModelForm, TextInput, Textarea, Select
 
 
 class Setting(models.Model):
@@ -65,7 +65,6 @@ class ContactForm(ModelForm):
             'email': TextInput(attrs={'class': 'form-control', 'placeholder': 'Email Address'}),
             'message': Textarea(attrs={'class': 'form-control', 'placeholder': 'Your Message','rows':'8'}),
         }
-
 
 
 
