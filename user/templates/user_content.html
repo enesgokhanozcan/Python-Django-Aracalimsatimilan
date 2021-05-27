@@ -1,0 +1,61 @@
+{%  extends "homebase.html" %}
+
+{% block title %}{{ user.first_name }} Content {% endblock %}
+
+{% block keywords %}{{setting.keywords}}{% endblock %}
+
+{% block description %}{{setting.description}}{% endblock %}
+{% block head %}<link rel='shorcut icon' type="image/x-icon" href="{{setting.icon.url}}"/>{% endblock %}
+
+{% block content %}
+    <div class="breadcrumbs">
+				<ol class="breadcrumb">
+				  <li><a href="#">Home</a></li>
+				  <li class="active">User Content</li>
+				</ol>
+    </div><!--/breadcrums-->
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+					{% include "user_panel.html" %}
+				</div>
+
+
+                <div class="col-sm-9">
+                    <div>
+                        <div class="login-form">
+                            <h4 class="title">User Content List <a class="btn-primary" href="/user/addcontent">Add Content</a> </h4>
+                        </div>
+                    </div>
+                    <table>
+                            <tr>
+                                <td>Image</td>
+                                <td>Title</td>
+                                <td>Listing Date</td>
+                                <td>Status</td>
+                                <td>Detail</td>
+                            </tr>
+                            {% for rs in contents %}
+                            <tr>
+                                <td>
+                                    <img src="{{rs.image.url}}" alt="" width="200"></a>
+                                </td>
+                                <td> {{rs.title}}</td>
+                                <td>{{rs.create_at}}</td>
+                                <td> {{rs.status}}</td>
+                                <td><a href="/user/contentedit/{{rs.id}}">Edit</a><br>
+                                <a href="/user/contentdelete/{{rs.id}}" onclick="return confirm('Are you sure you want to delete the content?')">Delete</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+
+				</div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

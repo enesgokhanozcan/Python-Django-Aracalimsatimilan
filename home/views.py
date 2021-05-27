@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.contrib import messages
 
 # Create your views here.
+from content.models import Menu, Content
 from home.forms import SearchForm
 from home.models import Setting, ContactFormMessage, ContactForm
 from product.models import Product, Category, Images
@@ -17,10 +18,12 @@ def index(request):
     product_latest = Product.objects.all().order_by('-id')[:6]
     product_picked = Product.objects.all().order_by('?')[:6]
     category = Category.objects.all()
+    menu = Menu.objects.all()
     context={'setting' : setting,
              'page' : 'home',
              'sliderdata' : sliderdata,
              'category':category,
+             'menu':menu,
              'product_latest':product_latest,
              'product_picked':product_picked,
              'product_first':product_first}
@@ -102,3 +105,13 @@ def product_detail(request,id,slug):
                'product': product,
                'images':images}
     return render(request, 'product_detail.html', context)
+
+def menu(request,id):
+    content = Content.objects.get(menu_id=id)
+    if content:
+        link='/content'+str(content.id)+'menu'
+        return HttpResponseRedirect(link)
+    else:
+        messages.warning(request,"hata!")
+        link='/'
+        return HttpResponseRedirect(link)

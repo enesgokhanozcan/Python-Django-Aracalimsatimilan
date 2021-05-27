@@ -1,0 +1,59 @@
+{%  extends "homebase.html" %}
+
+{% block title %}{{ user.first_name }}Add Content {% endblock %}
+
+{% block keywords %}{{setting.keywords}}{% endblock %}
+
+{% block description %}{{setting.description}}{% endblock %}
+{% block head %}
+    <link rel='shorcut icon' type="image/x-icon" href="{{setting.icon.url}}"/>
+    {% load static %}
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+    <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+
+
+
+{% endblock %}
+
+{% block content %}
+    <div class="breadcrumbs">
+				<ol class="breadcrumb">
+				  <li><a href="#">Home</a></li>
+				  <li class="active">User Add Content</li>
+				</ol>
+    </div><!--/breadcrums-->
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+					{% include "user_panel.html" %}
+				</div>
+
+
+                <div class="col-sm-9">
+                    <div>
+                        <div class="login-form">
+                            <h4 class="title">Add Content</h4>
+                        </div>
+                    </div>
+                    <div class="content section">
+                        <form method="POST" enctype="multipart/form-data">
+                            {%  csrf_token %}
+                            <fieldset class="form-group">
+                                {{ form.media }}
+                                {{ form.as_p }}
+                            </fieldset>
+                            <div class="form-group">
+                                    <button type="submit" class="button light-blue">Save</button>
+                            </div>
+                        </form>
+                    </div>
+				</div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

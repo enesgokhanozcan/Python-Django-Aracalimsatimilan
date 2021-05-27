@@ -9,11 +9,11 @@ from product.models import Images
 
 class ContentImageInLine(admin.TabularInline):
     model = CImages
-    extra = 3
+    extra = 5
 
 class ContentAdmin(admin.ModelAdmin):
-    list_display = ['title','type','image_tag','status','create_at']
-    list_filter = ['status','type']
+    list_display = ['title','image_tag','status','create_at']
+    list_filter = ['status']
     inlines = [ContentImageInLine]
     prepopulated_fields = {'slug':('title',)}
 
