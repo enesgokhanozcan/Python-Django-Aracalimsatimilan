@@ -123,3 +123,7 @@ class ContentForm(ModelForm):
 
         }
 
+class ContentImageForm(ModelForm):
+    class Meta:
+        model=CImages
+        fields=['title','image']

@@ -33,6 +33,7 @@
                                 <td>Image</td>
                                 <td>Title</td>
                                 <td>Listing Date</td>
+                                <td>Gallery</td>
                                 <td>Status</td>
                                 <td>Detail</td>
                             </tr>
@@ -44,6 +45,7 @@
                                 </td>
                                 <td> {{rs.title}}</td>
                                 <td>{{rs.create_at}}</td>
+                                <td><a href="javascript:;" onclick="window.open('/user/contentaddimage/{{ rs.id }}','gallery','height=600,width=800,top=50,left=150')">Gallery</a> </td>
                                 <td> {{rs.status}}</td>
                                 <td><a href="/user/contentedit/{{rs.id}}">Edit</a><br>
                                 <a href="/user/contentdelete/{{rs.id}}" onclick="return confirm('Are you sure you want to delete the content?')">Delete</a>
