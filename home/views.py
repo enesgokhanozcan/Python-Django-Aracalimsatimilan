@@ -17,14 +17,12 @@ def index(request):
     sliderdata = Product.objects.all()[:4]
     product_first = Product.objects.all().order_by('id')[:12]
     product_latest = Product.objects.all().order_by('-id')[:6]
-    product_picked = Product.objects.all().order_by('?')[:6]
+    product_picked = Product.objects.all().order_by('-id')[:6]
     category = Category.objects.all()
-    content = Content.objects.all()
-    content_first = Content.objects.all().order_by('id')[:6]
+    content_first = Content.objects.filter(type='ilan',status='TRUE').order_by('id')[:6]
     menu = Menu.objects.all()
     context={'setting' : setting,
              'page' : 'home',
-             'content': content,
              'sliderdata' : sliderdata,
              'category':category,
              'menu':menu,
