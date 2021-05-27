@@ -39,6 +39,7 @@
                             {% for rs in contents %}
                             <tr>
                                 <td>
+                                    <a href="/content/{{ rs.id }}/{{ rs.slug }}">
                                     <img src="{{rs.image.url}}" alt="" width="200"></a>
                                 </td>
                                 <td> {{rs.title}}</td>

@@ -1,0 +1,79 @@
+{%  extends "homebase.html" %}
+
+{% block title %}{{content.title}}{% endblock %}
+
+{% block keywords %}{{content.keywords}}{% endblock %}
+
+{% block description %}{{content.description}}{% endblock %}
+{% block head %}<link rel='shorcut icon' type="image/x-icon" href="{{setting.icon.url}}"/>{% endblock %}
+
+{% block content %}
+    <div class="breadcrumbs">
+				<ol class="breadcrumb">
+				  <li><a href="#">Home</a></li>
+				  <li class="active">{{content.title}}</li>
+				</ol>
+    </div><!--/breadcrums-->
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 padding-right">
+					<div class="product-details"><!--product-details-->
+						<div class="col-sm-5">
+							<div class="view-product">
+								<img src="{{ content.image.url }}" alt="" />
+							</div>
+							<div id="similar-product" class="carousel slide" data-ride="carousel">
+
+								  <!-- Wrapper for slides -->
+								    <div class="carousel-inner">
+										<div class="item active">
+										  <a href=""><img src="{{ content.image.url }}" alt=""></a>
+										</div>
+                                        {% for rs in images %}
+										<div class="item">
+										  <a href=""><img src="{{ rs.image.url }}" alt=""></a>
+										</div>
+                                        {% endfor %}
+									</div>
+
+								  <!-- Controls -->
+								  <a class="left item-control" href="#similar-product" data-slide="prev">
+									<i class="fa fa-angle-left"></i>
+								  </a>
+								  <a class="right item-control" href="#similar-product" data-slide="next">
+									<i class="fa fa-angle-right"></i>
+								  </a>
+							</div>
+						</div>
+						<div class="col-sm-5">
+							<div class="product-information"><!--/product-information-->
+								<img src="images/product-details/new.jpg" class="newarrival" alt="" />
+								<h2>{{ content.title}}</h2>
+								<p><b>Product ID:</b>{{ content.id}}</p>
+								<span>
+									<span><b>Price:</b>{{ content.price}}<b>$</b></span>
+								</span>
+                                <p><b>Description:</b> {{ content.description}}</p>
+                                <p><b>Case Type:</b> {{ content.case_type}}</p>
+                                <p><b>Engine Capacity:</b> {{ content.engine_capacity}}<b> cc</b></p>
+                                <p><b>Motor power:</b> {{ content.motor_power}}</p>
+                                <p><b>Fuel:</b> {{ content.fuel}}</p>
+                                <p><b>Year:</b> {{ content.year}}</p>
+                                <p><b>Description:</b> {{ content.description}}</p>
+								<p><b>Ad Status:</b> {{ content.status}}</p>
+								<p><b>Condition:</b>Used</p>
+							</div>
+                            <div>
+                                <p><b>Detail</b> {{ content.detail | safe}}</p>
+                            </div>
+						</div>
+                    </div>
+                </div><!--/product-details-->
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

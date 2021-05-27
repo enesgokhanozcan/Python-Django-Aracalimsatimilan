@@ -61,6 +61,7 @@ STATUS = (
 
 class Content(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
+    menu = models.OneToOneField(Menu, null=True, on_delete=models.CASCADE)
     type = models.CharField(max_length=10, choices=TYPE)
     title = models.CharField(max_length=200)
     description = models.CharField(blank=True,max_length=300)

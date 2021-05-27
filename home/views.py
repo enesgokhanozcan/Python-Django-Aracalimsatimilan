@@ -5,28 +5,33 @@ from django.shortcuts import render
 from django.contrib import messages
 
 # Create your views here.
-from content.models import Menu, Content
+from content.models import Menu, Content, CImages
 from home.forms import SearchForm
 from home.models import Setting, ContactFormMessage, ContactForm
 from product.models import Product, Category, Images
 
 
 def index(request):
+    current_user=request.user
     setting = Setting.objects.get(pk=1)
     sliderdata = Product.objects.all()[:4]
     product_first = Product.objects.all().order_by('id')[:12]
     product_latest = Product.objects.all().order_by('-id')[:6]
     product_picked = Product.objects.all().order_by('?')[:6]
     category = Category.objects.all()
+    content = Content.objects.all()
+    content_first = Content.objects.all().order_by('id')[:6]
     menu = Menu.objects.all()
     context={'setting' : setting,
              'page' : 'home',
+             'content': content,
              'sliderdata' : sliderdata,
              'category':category,
              'menu':menu,
              'product_latest':product_latest,
              'product_picked':product_picked,
-             'product_first':product_first}
+             'product_first':product_first,
+             'content_first':content_first}
     return render(request, 'index.html', context)
 def aboutus(request):
     setting = Setting.objects.get(pk=1)
@@ -109,9 +114,28 @@ def product_detail(request,id,slug):
 def menu(request,id):
     content = Content.objects.get(menu_id=id)
     if content:
-        link='/content'+str(content.id)+'menu'
+        link='/content/'+str(content.id)+'/menu'
         return HttpResponseRedirect(link)
     else:
-        messages.warning(request,"hata!")
+        messages.warning(request,"Opss! Something wrong...")
         link='/'
+        return HttpResponseRedirect(link)
+
+def contentdetail(request,id,slug):
+    category = Category.objects.all()
+    menu = Menu.objects.all()
+    try:
+        content = Content.objects.get(pk=id)
+        setting = Setting.objects.get(pk=1)
+        images = CImages.objects.filter(content_id=id)
+        context = {'content': content,
+                   'category': category,
+                   'menu': menu,
+                   'images': images,
+                   'setting': setting}
+        return render(request, 'content_detail.html', context)
+
+    except:
+        messages.warning(request, " Error! Related content not found.")
+        link = '/error'
         return HttpResponseRedirect(link)

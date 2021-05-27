@@ -36,6 +36,8 @@ urlpatterns = [
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('category/<int:id>/<slug:slug>', views.category_products, name='category_products'),
     path('product/<int:id>/<slug:slug>', views.product_detail, name='product_detail'),
+    path('menu/<int:id>', views.menu, name='menu'),
+    path('content/<int:id>/<slug:slug>', views.contentdetail, name='contentdetail'),
     path('login/', UserViews.login_form, name='login_form'),
     path('logout/', UserViews.logout_func, name='logout_func'),
     path('signup/', UserViews.signup_form, name='signup_form'),
