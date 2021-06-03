@@ -7,7 +7,7 @@ from django.contrib import messages
 # Create your views here.
 from content.models import Menu, Content, CImages
 from home.forms import SearchForm
-from home.models import Setting, ContactFormMessage, ContactForm
+from home.models import Setting, ContactFormMessage, ContactForm, FAQ
 from product.models import Product, Category, Images
 
 
@@ -137,3 +137,15 @@ def contentdetail(request,id,slug):
         messages.warning(request, " Error! Related content not found.")
         link = '/error'
         return HttpResponseRedirect(link)
+
+
+def faq(request):
+    setting = Setting.objects.get(pk=1)
+    category = Category.objects.all()
+    menu = Menu.objects.all()
+    faq = FAQ.objects.all().order_by('ordernumber')
+    context = {'category': category,
+               'menu': menu,
+               'faq': faq,
+               'setting': setting}
+    return render(request, 'faq.html', context)

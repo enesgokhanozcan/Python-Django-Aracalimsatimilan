@@ -1,0 +1,36 @@
+{%  extends "homebase.html" %}
+
+{% block title %} Frequently Asked Questions {% endblock %}
+
+{% block keywords %}{% endblock %}
+
+{% block description %}{% endblock %}
+{% block head %}<link rel='shorcut icon' type="image/x-icon" href="{{setting.icon.url}}"/>{% endblock %}
+
+{% block content %}
+    <div class="breadcrumbs">
+				<ol class="breadcrumb">
+				  <li><a href="#">Home</a></li>
+				  <li class="active">Frequently Asked Questions</li>
+				</ol>
+    </div><!--/breadcrums-->
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 padding-right">
+                    <div class="features_items"><!--features_items-->
+                        <h2 class="title text-center">Frequently Asked Questions</h2>
+                        {% for rs in faq %}
+                            <h3>{{rs.question}}</h3>
+                            <div>
+                                <p>
+                                    {{rs.answer}}
+                                </p>
+                            </div>
+				        {% endfor %}
+                    </div><!--features_items-->
+                </div>
+         </div>
+        </div>
+    </div>
+{% endblock %}
